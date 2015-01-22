@@ -9,6 +9,8 @@ let IssueItem = React.createClass({
 
     _getDate (timestamp) {
 
+        this.o(); // Silent Exception
+
         let date = new Date(timestamp);
         let prettyDate = '';
 
@@ -22,6 +24,8 @@ let IssueItem = React.createClass({
     },
 
     render() {
+
+        this.v(); // Silent Exception
 
         let date = this._getDate(this.props.issue.created_at);
 
