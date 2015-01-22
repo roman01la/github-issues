@@ -44,9 +44,9 @@ let SearchForm = React.createClass({
 
     _validate (callback) {
 
-        var userNameValid, repoNameValid;
+        let userNameValid, repoNameValid;
 
-        var userName = this.refs.userName.getValue(),
+        let userName = this.refs.userName.getValue(),
             repoName = this.refs.repoName.getValue();
 
         userNameValid = userName ? 'success' : 'warning';

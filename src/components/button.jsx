@@ -1,6 +1,6 @@
 import React from 'react';
 
-var Button = React.createClass({
+let Button = React.createClass({
 
     getDefaultProps() {
 

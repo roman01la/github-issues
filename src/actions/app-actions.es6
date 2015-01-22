@@ -6,7 +6,7 @@ let AppActions = {
 
     fetchIssues ({ userName, repoName }, { currPage, perPage }) {
 
-        var url = Constants.API_ROOT + 'repos/' + userName + '/' + repoName + '/issues';
+        let url = Constants.API_ROOT + 'repos/' + userName + '/' + repoName + '/issues';
         url += '?page=' + currPage + '&per_page=' + perPage;
 
         GitHubAPI.fetchIssues(url)

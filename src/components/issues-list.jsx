@@ -45,7 +45,7 @@ let IssuesList = React.createClass({
 
     render() {
 
-        var issuesList = this.state.issues.map((issue, index) => {
+        let issuesList = this.state.issues.map((issue, index) => {
 
             return <IssueItem key={index} issue={issue} />;
         });

@@ -2,7 +2,7 @@ let fetch = function (url) {
 
     return new Promise(function (resolve, reject) {
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
 
         xhr.open('GET', url);
         xhr.responseType = 'json';
