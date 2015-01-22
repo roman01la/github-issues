@@ -7,8 +7,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.(jsx|es6)$/, exclude: /node_modules/, loaders: ['6to5-loader?optional=coreAliasing'] },
-            { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader?paths=node_modules/' },
-            { test: /.*\.(woff|eot|svg|ttf)$/, loader: 'file-loader?name=../fonts/[hash].font.[ext]' }
+            { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader?paths=node_modules/' }
         ]
     },
     output: {
