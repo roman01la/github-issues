@@ -1,0 +1,21 @@
+module.exports = {
+
+    watch: true,
+    entry: [
+        __dirname + '/src/app.jsx'
+    ],
+    module: {
+        loaders: [
+            { test: /\.(jsx|es6)$/, exclude: /node_modules/, loaders: ['6to5-loader?optional=coreAliasing'] },
+            { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader?paths=node_modules/' },
+            { test: /.*\.(woff|eot|svg|ttf)$/, loader: 'file-loader?name=../fonts/[hash].font.[ext]' }
+        ]
+    },
+    output: {
+        path: __dirname + '/dist',
+        filename: 'app.js'
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx', '.es6', '.styl']
+    },
+};

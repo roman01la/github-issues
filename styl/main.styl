@@ -1,0 +1,103 @@
+/* Normalize */
+
+html {
+    box-sizing border-box
+}
+html * {
+    box-sizing inherit
+}
+body {
+    margin 0
+    font normal 16px sans-serif
+}
+
+/* Global */
+
+input {
+    padding 4px
+    height 26px
+    border-radius 2px
+    border 1px solid #ccc
+}
+label {
+    font-size .8rem
+}
+
+button {
+    display block
+    padding 6px 12px
+    border none
+    border-radius 2px
+    background #479BE2
+    font-size 1rem
+    color #fafafa
+}
+
+/* Application */
+
+.app {
+    padding 10px
+    margin 0 auto
+    max-width 768px
+}
+
+/* Search form */
+
+.search-form .field {
+    margin 10px 0
+
+    label,
+    input {
+        display block
+    }
+}
+
+/* Issues list */
+
+.issues .list {
+    width 100%
+}
+.issue {
+    font-size .8rem
+
+    td {
+        padding 8px 2px 4px 2px
+        border-bottom 1px solid #242424
+    }
+    .title a {
+        color #242424
+        text-decoration none
+    }
+    .time {
+        font-size .7rem
+    }
+}
+
+/* Pagination form */
+
+.pagination {
+    text-align center
+    margin 30px 0
+
+    .prev,
+    .next,
+    .field {
+        display inline-block
+        vertical-align middle
+    }
+    input[type="number"] {
+        width 50px
+        text-align center
+
+        &:disabled {
+            background #ccc
+        }
+    }
+    .field {
+        margin 0 20px
+
+        label {
+            margin 0 10px 0 0
+        }
+    }
+}
