@@ -31,7 +31,8 @@ let SearchForm = React.createClass({
             matchedRepos: [],
             showDropdown: false,
             enterDropdown: false,
-            repoSelected: false
+            repoSelected: false,
+            loading: false
         };
     },
 
@@ -96,12 +97,17 @@ let SearchForm = React.createClass({
 
         if (userName !== this._prev.repoName) {
 
+            this.setState({ loading: true });
+
             this._prev.repoName = userName;
             AppActions.fetchRepos(userName)
-                .then(() => this.setState({ showDropdown: true }, () => {
+                .then(() => this.setState({
 
-                    this.setState({ matchedRepos: this._matchRepos() });
+                    showDropdown: true,
+                    matchedRepos: this._matchRepos(),
+                    loading: false
                 }));
+
         } else {
 
             !this.state.showDropdown && this.setState({ showDropdown: true });
@@ -167,10 +173,13 @@ let SearchForm = React.createClass({
 
     _submitForm() {
 
-        return AppActions.submitForm(UserStore.getState(), PaginationStore.getState());
+        return AppActions.submitForm(UserStore.getState(), PaginationStore.getState())
+                .then(() => AppActions.setRepo(this.state.user.repoName));
     },
 
     render() {
+
+        let loader = <span className='fa fa-spinner'></span>;
 
         let dropdown = (
 
@@ -195,7 +204,7 @@ let SearchForm = React.createClass({
                        required />
 
                 <Input ref='repoName'
-                       label='Username repository'
+                       label='Repository name'
                        value={this.state.user.repoName}
                        onChange={this._onRepoChange}
                        onFocus={this._onRepoFocus}
@@ -203,6 +212,7 @@ let SearchForm = React.createClass({
                        onKeyDown={this._onRepoKeyDown}
                        required>
 
+                    {this.state.loading ? loader : null}
                     {dropdown}
 
                 </Input>

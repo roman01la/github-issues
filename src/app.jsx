@@ -6,6 +6,7 @@ import IssuesStore from './stores/issues-store';
 import SearchForm from './components/search-form';
 import IssuesList from './components/issues-list';
 import Notification from './components/notification';
+import RepoInfo from './components/repo-info';
 
 require('../styl/main.styl');
 
@@ -38,11 +39,19 @@ let App = React.createClass({
 
     render() {
 
+        let repo = ReposStore.getState().selectedRepo;
+
         return (
             <div className='app'>
-                <SearchForm />
+
+                <section className='top'>
+                    <SearchForm />
+                    <RepoInfo repo={repo} />
+                </section>
+
                 <IssuesList />
                 <Notification status={this.state.status} />
+
             </div>
         );
     }

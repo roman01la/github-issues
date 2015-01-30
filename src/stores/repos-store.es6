@@ -7,7 +7,8 @@ let ReposStore = new Store({
 
     _state: {
 
-        repos: []
+        repos: [],
+        selectedRepo: {}
     }
 });
 
@@ -27,6 +28,18 @@ ReposStore.bindAction(Constants.FETCH_REPOS_SUCCESS, action => {
     let nextState = { repos: action.payload.response };
 
     ReposStore.update(nextState, action.id, Constants.FETCH_REPOS_SUCCESS);
+});
+
+ReposStore.bindAction(Constants.SET_REPO, action => {
+
+    let selectedRepo = ReposStore.getState().repos
+        .filter(repo => action.payload.repoName === repo.name);
+
+    let nextState = selectedRepo.length === 1 ?
+        { selectedRepo: selectedRepo[0] } :
+        {};
+
+    ReposStore.update(nextState);
 });
 
 export default ReposStore;

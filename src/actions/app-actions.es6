@@ -38,6 +38,15 @@ let AppActions = {
             actionType: Constants.PAGINATE,
             payload: { userData, paginationData }
         });
+    },
+
+    setRepo (repoName) {
+
+        return this._dispatch({
+
+            actionType: Constants.SET_REPO,
+            payload: { repoName }
+        });
     }
 };
 

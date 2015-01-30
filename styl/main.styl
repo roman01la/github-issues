@@ -32,6 +32,18 @@ button {
     font-size 1rem
     color #fafafa
 }
+a {
+    color #242424
+    text-decoration none
+
+    &:hover {
+        text-decoration underline
+    }
+}
+h3 {
+    font-weight normal
+    margin .5rem 0
+}
 
 /* Application */
 
@@ -41,7 +53,44 @@ button {
     max-width 768px
 }
 
+/* Top section */
+
+.top {
+    display flex
+
+    .search-form,
+    .repo-info {
+        flex 1
+    }
+    .stats {
+        margin 20px 0 0
+
+        span {
+            margin 0 10px
+
+            &:first-child {
+                margin 0 10px 0 0
+            }
+            &:last-child {
+                margin 0 0 0 10px
+            }
+        }
+        .fa::before {
+            margin 0 5px 0 0
+        }
+    }
+}
+
+.repo-name {
+    margin-bottom 0
+}
+
 /* Search form */
+
+.search-form {
+    max-width 135px
+    margin 0 20px 0 0
+}
 
 .search-form .field {
     margin 10px 0
@@ -52,15 +101,12 @@ button {
         display block
     }
 
-    .loader {
-        width 2px
-        height 15px
-        background #242424
+    .fa-spinner {
         position absolute
         bottom 5px
         left 115px
         transform rotate(0deg)
-        animation spin 400ms linear infinite
+        animation spin 1000ms linear infinite
     }
 }
 
@@ -106,10 +152,6 @@ button {
     td {
         padding 8px 2px 4px 2px
         border-bottom 1px solid #242424
-    }
-    .title a {
-        color #242424
-        text-decoration none
     }
     .time {
         font-size .7rem

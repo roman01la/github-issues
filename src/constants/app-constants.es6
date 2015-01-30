@@ -18,7 +18,9 @@ const Constants = {
 
     PAGINATE: Symbol('paginate'),
     PAGINATE_SUCCESS: Symbol('paginate-success'),
-    PAGINATE_ERROR: Symbol('paginate-error')
+    PAGINATE_ERROR: Symbol('paginate-error'),
+
+    SET_REPO: Symbol('set-repo')
 };
 
 export default Constants;
