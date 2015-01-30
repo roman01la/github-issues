@@ -35,6 +35,7 @@ let Input = React.createClass({
                        min={this.props.min}
                        value={this.props.value}
                        onChange={this.props.onChange}
+                       onKeyDown={this.props.onKeyDown}
                        onFocus={this.props.onFocus}
                        onBlur={this.props.onBlur}
                        required={this.props.required}

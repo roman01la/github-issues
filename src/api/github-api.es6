@@ -1,4 +1,4 @@
-import API from './api';
+import API from '../lib/api';
 
 import Constants from '../constants/app-constants';
 

@@ -1,6 +1,6 @@
 import GitHubAPI from '../api/github-api';
 
-import Store from './store';
+import Store from '../lib/store';
 import Constants from '../constants/app-constants';
 
 let PaginationStore = new Store({

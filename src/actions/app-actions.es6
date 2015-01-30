@@ -1,6 +1,6 @@
 import Constants from '../constants/app-constants';
 
-import Actions from './actions';
+import Actions from '../lib/actions';
 
 let AppActions = {
 

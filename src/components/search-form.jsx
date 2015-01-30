@@ -8,6 +8,8 @@ import IssuesStore from '../stores/issues-store';
 import PaginationStore from '../stores/pagination-store';
 
 import Dropdown from './dropdown';
+import Button from './button';
+import Input from './input';
 
 let SearchForm = React.createClass({
 
@@ -50,8 +52,8 @@ let SearchForm = React.createClass({
 
             this.setState({ user: {
 
-                userName: this.refs.userName.getDOMNode().value,
-                repoName: this.refs.repoName.getDOMNode().value
+                userName: this.refs.userName.getValue(),
+                repoName: this.refs.repoName.getValue()
             } }, resolve);
         });
     },
@@ -134,7 +136,7 @@ let SearchForm = React.createClass({
 
         this.setState({ enterDropdown: false}, () => {
 
-            this.refs.repoName.getDOMNode().focus();
+            this.refs.repoName.refs.input.getDOMNode().focus();
         });
     },
 
@@ -142,7 +144,7 @@ let SearchForm = React.createClass({
 
         let repoName = this.state.matchedRepos[index];
 
-        this.refs.repoName.getDOMNode().value = repoName;
+        this.refs.repoName.refs.input.getDOMNode().value = repoName;
 
         this._updateUser()
             .then(() => {
@@ -186,32 +188,26 @@ let SearchForm = React.createClass({
 
             <form ref='form' className='search-form' onSubmit={this._onSubmit}>
 
-                <div className='field'>
+                <Input ref='userName'
+                       label='GitHub username'
+                       value={this.state.user.userName}
+                       onChange={this._onNameChange}
+                       required />
 
-                    <label className='label'>GitHub username</label>
-
-                    <input ref='userName'
-                           value={this.state.user.userName}
-                           onChange={this._onNameChange} required />
-
-                </div>
-
-                <div className='field'>
-
-                    <label className='label'>Username repository</label>
-
-                    <input ref='repoName'
-                           value={this.state.user.repoName}
-                           onChange={this._onRepoChange}
-                           onFocus={this._onRepoFocus}
-                           onBlur={this._onRepoBlur}
-                           onKeyDown={this._onRepoKeyDown} required />
+                <Input ref='repoName'
+                       label='Username repository'
+                       value={this.state.user.repoName}
+                       onChange={this._onRepoChange}
+                       onFocus={this._onRepoFocus}
+                       onBlur={this._onRepoBlur}
+                       onKeyDown={this._onRepoKeyDown}
+                       required>
 
                     {dropdown}
 
-                </div>
+                </Input>
 
-                <button type='submit'>List issues</button>
+                <Button type='submit'>List issues</Button>
 
             </form>
         );

@@ -1,4 +1,4 @@
-import Store from './store';
+import Store from '../lib/store';
 import Constants from '../constants/app-constants';
 
 let UserStore = new Store({
