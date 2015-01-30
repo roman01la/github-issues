@@ -4,6 +4,11 @@ import Markdown from './markdown';
 
 let IssueItem = React.createClass({
 
+    _dictionary: {
+
+        months: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+    },
+
     getInitialState() {
 
         return {
@@ -12,9 +17,10 @@ let IssueItem = React.createClass({
         };
     },
 
-    _dictionary: {
+    componentWillReceiveProps (nextProps) {
 
-        months: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+        nextProps.issue !== this.props.issue && this.state.showIssue &&
+            this.setState({ showIssue: false });
     },
 
     _getDate (timestamp) {
