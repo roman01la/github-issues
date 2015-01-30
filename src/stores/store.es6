@@ -8,7 +8,11 @@ class Store extends EventEmitter {
     constructor (defs) {
 
         this._state = {};
+        this._status = null;
         this._actions = {};
+        this._callbacks = {};
+
+        this.dispatchToken = Dispatcher.register(this.handleAction.bind(this));
 
         Object.assign(this, defs);
     }
@@ -16,13 +20,16 @@ class Store extends EventEmitter {
     update (nextState, id, type) {
 
         Object.assign(this._state, nextState);
-        this.emitChange();
 
         if (type) {
 
             this._actions[id][type]();
             delete this._actions[id];
         }
+
+        this._status = type;
+
+        this.emitChange();
     }
 
     getState() {
@@ -32,7 +39,7 @@ class Store extends EventEmitter {
 
     emitChange() {
 
-        this.emit(Constants.CHANGE_EVENT);
+        this.emit(Constants.CHANGE_EVENT, this._status);
     }
 
     addChangeListener (callback) {
@@ -45,13 +52,6 @@ class Store extends EventEmitter {
         this.removeListener(Constants.CHANGE_EVENT, callback);
     }
 
-    dispatchToken: ''
-
-    handleAction (callback) {
-
-        this.dispatchToken = Dispatcher.register(callback.bind(this));
-    }
-
     registerAction (promise) {
 
         let id = Symbol();
@@ -59,6 +59,20 @@ class Store extends EventEmitter {
         this._actions[id] = promise;
 
         return id;
+    }
+
+    bindAction (type, callback) {
+
+        this._callbacks[type] = this._callbacks[type] || [];
+
+        this._callbacks[type].push(callback);
+    }
+
+    handleAction (action) {
+
+        let callbacks = this._callbacks[action.actionType];
+
+        callbacks && callbacks.map(callback => callback(action));
     }
 };
 

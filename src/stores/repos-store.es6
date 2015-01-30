@@ -11,28 +11,22 @@ let ReposStore = new Store({
     }
 });
 
-ReposStore.handleAction(function (action) {
+ReposStore.bindAction(Constants.FETCH_REPOS, action => {
 
-    switch (action.actionType) {
+    let id = ReposStore.registerAction({
 
-        case Constants.FETCH_REPOS:
+        [Constants.FETCH_REPOS_SUCCESS]: action.promise.resolve,
+        [Constants.FETCH_REPOS_ERROR]: action.promise.reject
+    });
 
-            let id = this.registerAction({
+    GitHubAPI.fetchRepos(id, action.payload.userName);
+});
 
-                [Constants.FETCH_REPOS_SUCCESS]: action.promise.resolve,
-                [Constants.FETCH_REPOS_ERROR]: action.promise.reject
-            });
+ReposStore.bindAction(Constants.FETCH_REPOS_SUCCESS, action => {
 
-            GitHubAPI.fetchRepos(id, action.payload.userName);
-            break;
+    let nextState = { repos: action.payload.response };
 
-        case Constants.FETCH_REPOS_SUCCESS:
-
-            let nextState = { repos: action.payload.response };
-
-            ReposStore.update(nextState, action.id, Constants.FETCH_REPOS_SUCCESS);
-            break;
-    }
+    ReposStore.update(nextState, action.id, Constants.FETCH_REPOS_SUCCESS);
 });
 
 export default ReposStore;

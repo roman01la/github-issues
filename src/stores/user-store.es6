@@ -10,23 +10,17 @@ let UserStore = new Store({
     }
 });
 
-UserStore.handleAction(function (action) {
+UserStore.bindAction(Constants.UPDATE_USER, action => {
 
-    switch (action.actionType) {
+    let id = UserStore.registerAction({
 
-        case Constants.UPDATE_USER:
+        [Constants.UPDATE_USER_SUCCESS]: action.promise.resolve,
+        [Constants.UPDATE_USER_ERROR]: action.promise.reject
+    });
 
-            let id = this.registerAction({
+    let nextState = action.payload.userData;
 
-                [Constants.UPDATE_USER_SUCCESS]: action.promise.resolve,
-                [Constants.UPDATE_USER_ERROR]: action.promise.reject
-            });
-
-            let nextState = action.payload.userData;
-
-            UserStore.update(nextState, id, Constants.UPDATE_USER_SUCCESS);
-            break;
-    }
+    UserStore.update(nextState, id, Constants.UPDATE_USER_SUCCESS);
 });
 
 export default UserStore;

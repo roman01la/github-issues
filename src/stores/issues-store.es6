@@ -11,35 +11,29 @@ let IssuesStore = new Store({
     }
 });
 
-IssuesStore.handleAction(function (action) {
+IssuesStore.bindAction(Constants.FETCH_ISSUES, action => {
 
-    switch (action.actionType) {
+    let id = IssuesStore.registerAction({
 
-        case Constants.FETCH_ISSUES:
+        [Constants.FETCH_ISSUES_SUCCESS]: action.promise.resolve,
+        [Constants.FETCH_ISSUES_ERROR]: action.promise.reject
+    });
 
-            let id = this.registerAction({
+    GitHubAPI.fetchIssues(id, action.payload);
+});
 
-                [Constants.FETCH_ISSUES_SUCCESS]: action.promise.resolve,
-                [Constants.FETCH_ISSUES_ERROR]: action.promise.reject
-            });
+IssuesStore.bindAction(Constants.FETCH_ISSUES_SUCCESS, action => {
 
-            GitHubAPI.fetchIssues(id, action.payload);
-            break;
+    let nextState = { issues: action.payload.response };
 
-        case Constants.FETCH_ISSUES_SUCCESS:
+    IssuesStore.update(nextState, action.id, Constants.FETCH_ISSUES_SUCCESS);
+});
 
-            let nextState = { issues: action.payload.response };
+IssuesStore.bindAction(Constants.PAGINATE_SUCCESS, action => {
 
-            IssuesStore.update(nextState, action.id, Constants.FETCH_ISSUES_SUCCESS);
-            break;
+    let nextState = { issues: action.payload.response };
 
-        case Constants.PAGINATE_SUCCESS:
-
-            let nextState = { issues: action.payload.response };
-
-            IssuesStore.update(nextState);
-            break;
-    }
+    IssuesStore.update(nextState);
 });
 
 export default IssuesStore;

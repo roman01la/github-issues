@@ -13,28 +13,21 @@ let PaginationStore = new Store({
     }
 });
 
-PaginationStore.handleAction(function (action) {
+PaginationStore.bindAction(Constants.PAGINATE, action => {
 
-    switch (action.actionType) {
+    let id = PaginationStore.registerAction({
 
-        case Constants.PAGINATE:
+        [Constants.PAGINATE_SUCCESS]: action.promise.resolve,
+        [Constants.PAGINATE_ERROR]: action.promise.reject
+    });
 
-            let id = this.registerAction({
+    GitHubAPI.paginate(id, action.payload)
+        .then(() => {
 
-                [Constants.PAGINATE_SUCCESS]: action.promise.resolve,
-                [Constants.PAGINATE_ERROR]: action.promise.reject
-            });
+            let nextState = action.payload.paginationData;
 
-            GitHubAPI.paginate(id, action.payload)
-                .then(() => {
-
-                    let nextState = action.payload.paginationData;
-
-                    PaginationStore.update(nextState, id, Constants.PAGINATE_SUCCESS);
-                });
-
-            break;
-    }
+            PaginationStore.update(nextState, id, Constants.PAGINATE_SUCCESS);
+        });
 });
 
 export default PaginationStore;

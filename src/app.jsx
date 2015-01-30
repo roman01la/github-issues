@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Dispatcher from './dispatchers/dispatcher';
-import Constants from './constants/app-constants';
+import ReposStore from './stores/repos-store';
+import IssuesStore from './stores/issues-store';
 
 import SearchForm from './components/search-form';
 import IssuesList from './components/issues-list';
@@ -15,22 +15,25 @@ let App = React.createClass({
 
         return {
 
-            notify: 0
+            status: ''
         };
     },
 
     componentDidMount() {
 
-        Dispatcher.register((action) => {
+        ReposStore.addChangeListener(this._onChange);
+        IssuesStore.addChangeListener(this._onChange);
+    },
 
-            switch (action.actionType) {
+    componentWillUnmount() {
 
-                case Constants.FETCH_ERROR:
+        ReposStore.removeChangeListener(this._onChange);
+        IssuesStore.removeChangeListener(this._onChange);
+    },
 
-                    this.setState({ notify: action.response });
-                    break;
-            }
-        });
+    _onChange (status) {
+
+        this.setState({ status });
     },
 
     render() {
@@ -39,7 +42,7 @@ let App = React.createClass({
             <div className='app'>
                 <SearchForm />
                 <IssuesList />
-                <Notification code={this.state.notify} />
+                <Notification status={this.state.status} />
             </div>
         );
     }

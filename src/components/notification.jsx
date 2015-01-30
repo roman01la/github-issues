@@ -9,15 +9,31 @@ let Notification = React.createClass({
 
         return {
 
-            show: false
+            show: false,
+            message: ''
         };
     },
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps ({ status }) {
 
-        if (nextProps.code) {
+        if (status) {
 
-            this.setState({ show: true }, () => {
+            let message = '';
+
+            switch (status) {
+
+                case Constants.FETCH_REPOS_SUCCESS:
+
+                    message = 'Repos fetched successfully!';
+                    break;
+
+                case Constants.FETCH_ISSUES_SUCCESS:
+
+                    message = 'Issues fetched successfully!';
+                    break;
+            }
+
+            this.setState({ show: true, message }, () => {
 
                 setTimeout(() => this.setState({ show: false }), 2000);
             });
@@ -27,7 +43,7 @@ let Notification = React.createClass({
     render() {
 
         let notify = this.state.show ?
-            <div className='message'>{'Ooops! ' + this.props.code}</div> : null;
+            <div className='message'>{this.state.message}</div> : null;
 
         return (
             <div className='notification'>{notify}</div>
