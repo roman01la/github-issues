@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events';
+import EventEmitter from 'eventemitter2';
 
 import Dispatcher from '../dispatchers/dispatcher';
 import Constants from '../constants/app-constants';

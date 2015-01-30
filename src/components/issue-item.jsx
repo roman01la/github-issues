@@ -1,6 +1,16 @@
 import React from 'react';
 
+import Markdown from './markdown';
+
 let IssueItem = React.createClass({
+
+    getInitialState() {
+
+        return {
+
+            showIssue: false
+        };
+    },
 
     _dictionary: {
 
@@ -21,16 +31,47 @@ let IssueItem = React.createClass({
         return prettyDate;
     },
 
+    _toggle (event) {
+
+        if (event.type === 'click' || event.keyCode === 13) {
+
+            event.preventDefault();
+
+            this.setState({ showIssue: !this.state.showIssue });
+        }
+    },
+
     render() {
 
         let date = this._getDate(this.props.issue.created_at);
 
+        let issue = <div className='issue-body'><Markdown md={this.props.issue.body} /></div>;
+
         return (
-            <tr className='issue'>
-                <td className='num'><strong>{'#' + this.props.issue.number}</strong></td>
-                <td className='title'><a href={this.props.issue.html_url}>{this.props.issue.title}</a></td>
-                <td className='time'><time>{date}</time></td>
-            </tr>
+
+            <div className='issue'>
+
+                <div className='issue-info'>
+
+                    <div className='num'><strong>
+                        <a href={this.props.issue.html_url} target='blank_'>
+                            {'#' + this.props.issue.number}
+                        </a>
+                    </strong></div>
+
+                    <div className='title'
+                         title='toggle'
+                         tabIndex='0'
+                         onClick={this._toggle}
+                         onKeyDown={this._toggle}>{this.props.issue.title}</div>
+
+                    <div className='time'><time>{date}</time></div>
+
+                </div>
+
+                {this.state.showIssue ? issue : null}
+
+            </div>
         );
     }
 

@@ -33,7 +33,7 @@ button {
     color #fafafa
 }
 a {
-    color #242424
+    color #479BE2
     text-decoration none
 
     &:hover {
@@ -43,6 +43,20 @@ a {
 h3 {
     font-weight normal
     margin .5rem 0
+}
+pre {
+    background #eee
+    padding 10px
+    border-radius 2px
+}
+code {
+    background #eee
+    padding 0 4px
+    border-radius 2px
+}
+pre code {
+    word-wrap break-word
+    padding 0
 }
 
 /* Application */
@@ -143,18 +157,39 @@ h3 {
 
 /* Issues list */
 
-.issues .list {
-    width 100%
-}
 .issue {
     font-size .8rem
+    display flex
+    flex-direction column
 
-    td {
-        padding 8px 2px 4px 2px
+    .issue-info {
+        display flex
+        justify-content space-between
         border-bottom 1px solid #242424
+        padding 10px 0 5px
+    }
+    .title {
+        align-self flex-start
+        flex 1
+        margin 0 20px
+
+        &:hover {
+            cursor pointer
+        }
     }
     .time {
         font-size .7rem
+    }
+
+    .issue-body {
+        padding 10px 0
+        line-height 1.2rem
+        border-bottom 1px dashed #242424
+        margin 0 0 20px
+
+        img {
+            width 100%
+        }
     }
 }
 

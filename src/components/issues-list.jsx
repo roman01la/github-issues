@@ -43,7 +43,7 @@ let IssuesList = React.createClass({
         return (
             <div className='issues'>
                 <Pagination minPage={1} minPerPage={1} />
-                <table className='list'><tbody>{issuesList}</tbody></table>
+                <div className='list'>{issuesList}</div>
             </div>
         );
     }
