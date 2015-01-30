@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Dispatcher from '../dispatchers/dispatcher';
+import Constants from '../constants/app-constants';
 import AppActions from '../actions/app-actions';
 
 import IssuesStore from '../stores/issues-store';
@@ -19,23 +21,11 @@ let IssuesList = React.createClass({
     componentDidMount() {
 
         IssuesStore.addChangeListener(this._onChange);
-        UserStore.addChangeListener(this._fetchIssues);
-        PaginationStore.addChangeListener(this._fetchIssues);
     },
 
     componentWillUnmount() {
 
         IssuesStore.removeChangeListener(this._onChange);
-        UserStore.removeChangeListener(this._fetchIssues);
-        PaginationStore.removeChangeListener(this._fetchIssues);
-    },
-
-    _fetchIssues() {
-
-        if (UserStore.valid) {
-
-            AppActions.fetchIssues(UserStore.getState(), PaginationStore.getState());
-        }
     },
 
     _onChange() {

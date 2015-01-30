@@ -7,25 +7,24 @@ let UserStore = new Store({
 
         userName: '',
         repoName: ''
-    },
-
-    valid: false
+    }
 });
 
-UserStore.handleAction((action) => {
+UserStore.handleAction(function (action) {
 
     switch (action.actionType) {
 
         case Constants.UPDATE_USER:
 
-            let user = action.userData;
+            let id = this.registerAction({
 
-            if (user.userName && user.repoName) {
+                [Constants.UPDATE_USER_SUCCESS]: action.promise.resolve,
+                [Constants.UPDATE_USER_ERROR]: action.promise.reject
+            });
 
-                UserStore.valid = true;
-                UserStore.update(user);
-            }
+            let nextState = action.payload.userData;
 
+            UserStore.update(nextState, id, Constants.UPDATE_USER_SUCCESS);
             break;
     }
 });

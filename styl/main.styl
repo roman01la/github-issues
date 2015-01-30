@@ -45,10 +45,53 @@ button {
 
 .search-form .field {
     margin 10px 0
+    position relative
 
     label,
     input {
         display block
+    }
+
+    .loader {
+        width 2px
+        height 15px
+        background #242424
+        position absolute
+        bottom 5px
+        left 115px
+        transform rotate(0deg)
+        animation spin 400ms linear infinite
+    }
+}
+
+@keyframes spin {
+    to {
+        transform rotate(360deg)
+    }
+}
+
+/* Dropdown */
+
+.dropdown {
+    font-size .7rem
+    position relative
+
+    .list {
+        margin 0
+        padding 0
+        list-style none
+        position absolute
+        top 5px
+        background #ffffff
+    }
+    .item {
+        padding 2px
+        border-bottom 1px solid #242424
+
+        &:focus {
+            background #479BE2
+            color #fafafa
+        }
     }
 }
 
@@ -101,3 +144,15 @@ button {
         }
     }
 }
+
+/* Notification */
+
+.notification .message {
+    background #FF5F39
+    color #fafafa
+    padding 10px
+    position absolute
+    top 0
+    right 0
+}
+

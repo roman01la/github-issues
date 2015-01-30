@@ -4,6 +4,7 @@ import AppActions from '../actions/app-actions';
 
 import IssuesStore from '../stores/issues-store';
 import PaginationStore from '../stores/pagination-store';
+import UserStore from '../stores/user-store';
 
 import Input from './input';
 import Button from './button';
@@ -57,7 +58,7 @@ let Pagination = React.createClass({
 
         this.setState(nextState, () => {
 
-            AppActions.paginate(this.state);
+            AppActions.paginate(UserStore.getState(), this.state);
         });
     },
 

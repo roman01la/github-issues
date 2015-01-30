@@ -35,8 +35,12 @@ let Input = React.createClass({
                        min={this.props.min}
                        value={this.props.value}
                        onChange={this.props.onChange}
+                       onFocus={this.props.onFocus}
+                       onBlur={this.props.onBlur}
                        required={this.props.required}
                        disabled={this.props.disabled} />
+
+                {this.props.children}
 
             </div>
         );

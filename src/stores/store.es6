@@ -1,20 +1,28 @@
+import { EventEmitter } from 'events';
+
 import Dispatcher from '../dispatchers/dispatcher';
 import Constants from '../constants/app-constants';
-import { EventEmitter } from 'events';
 
 class Store extends EventEmitter {
 
     constructor (defs) {
 
+        this._state = {};
+        this._actions = {};
+
         Object.assign(this, defs);
     }
 
-    _state: {}
+    update (nextState, id, type) {
 
-    update (state) {
-
-        Object.assign(this._state, state);
+        Object.assign(this._state, nextState);
         this.emitChange();
+
+        if (type) {
+
+            this._actions[id][type]();
+            delete this._actions[id];
+        }
     }
 
     getState() {
@@ -41,7 +49,16 @@ class Store extends EventEmitter {
 
     handleAction (callback) {
 
-        this.dispatchToken = Dispatcher.register(callback);
+        this.dispatchToken = Dispatcher.register(callback.bind(this));
+    }
+
+    registerAction (promise) {
+
+        let id = Symbol();
+
+        this._actions[id] = promise;
+
+        return id;
     }
 };
 

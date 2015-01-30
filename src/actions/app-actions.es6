@@ -1,55 +1,46 @@
-import GitHubAPI from '../api/github-api';
-import Dispatcher from '../dispatchers/dispatcher';
 import Constants from '../constants/app-constants';
+
+import Actions from './actions';
 
 let AppActions = {
 
-    fetchIssues ({ userName, repoName }, { currPage, perPage }) {
+    fetchRepos (userName) {
 
-        let url = Constants.API_ROOT + 'repos/' + userName + '/' + repoName + '/issues';
-        url += '?page=' + currPage + '&per_page=' + perPage;
+        return this._dispatch({
 
-        GitHubAPI.fetchIssues(url)
-            .then((issues) => {
-
-                this._dispatch({
-
-                    actionType: Constants.FETCH_ISSUES,
-                    response: issues
-                });
-            })
-            .catch((error) => {
-
-                this._dispatch({
-
-                    actionType: Constants.FETCH_ISSUES,
-                    response: error
-                });
-            });
+            actionType: Constants.FETCH_REPOS,
+            payload: { userName }
+        });
     },
 
     updateUser (userData) {
 
-        this._dispatch({
+        return this._dispatch({
 
             actionType: Constants.UPDATE_USER,
-            userData
+            payload: { userData }
         });
     },
 
-    paginate (paginationData) {
+    submitForm (userData, paginationData) {
 
-        this._dispatch({
+        return this._dispatch({
+
+            actionType: Constants.FETCH_ISSUES,
+            payload: { userData, paginationData }
+        });
+    },
+
+    paginate (userData, paginationData) {
+
+        return this._dispatch({
 
             actionType: Constants.PAGINATE,
-            paginationData
+            payload: { userData, paginationData }
         });
-    },
-
-    _dispatch (payload) {
-
-        Dispatcher.dispatch(payload);
     }
 };
+
+Object.assign(AppActions, Actions);
 
 export default AppActions;

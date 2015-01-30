@@ -1,3 +1,5 @@
+import GitHubAPI from '../api/github-api';
+
 import Store from './store';
 import Constants from '../constants/app-constants';
 
@@ -11,13 +13,26 @@ let PaginationStore = new Store({
     }
 });
 
-PaginationStore.handleAction((action) => {
+PaginationStore.handleAction(function (action) {
 
     switch (action.actionType) {
 
         case Constants.PAGINATE:
 
-            PaginationStore.update(action.paginationData);
+            let id = this.registerAction({
+
+                [Constants.PAGINATE_SUCCESS]: action.promise.resolve,
+                [Constants.PAGINATE_ERROR]: action.promise.reject
+            });
+
+            GitHubAPI.paginate(id, action.payload)
+                .then(() => {
+
+                    let nextState = action.payload.paginationData;
+
+                    PaginationStore.update(nextState, id, Constants.PAGINATE_SUCCESS);
+                });
+
             break;
     }
 });
