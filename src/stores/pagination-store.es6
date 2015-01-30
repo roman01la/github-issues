@@ -30,4 +30,17 @@ PaginationStore.bindAction(Constants.PAGINATE, action => {
         });
 });
 
+PaginationStore.bindAction(Constants.SET_PAGE_SIZE, action => {
+
+    let id = PaginationStore.registerAction({
+
+        [Constants.SET_PAGE_SIZE_SUCCESS]: action.promise.resolve,
+        [Constants.SET_PAGE_SIZE_ERROR]: action.promise.reject
+    });
+
+    let nextState = action.payload;
+
+    PaginationStore.update(nextState, id, Constants.SET_PAGE_SIZE_SUCCESS);
+});
+
 export default PaginationStore;

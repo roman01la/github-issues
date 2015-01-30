@@ -20,6 +20,10 @@ const Constants = {
     PAGINATE_SUCCESS: Symbol('paginate-success'),
     PAGINATE_ERROR: Symbol('paginate-error'),
 
+    SET_PAGE_SIZE: Symbol('set-page-size'),
+    SET_PAGE_SIZE_SUCCESS: Symbol('set-page-size-success'),
+    SET_PAGE_SIZE_ERROR: Symbol('set-page-size-error'),
+
     SET_REPO: Symbol('set-repo')
 };
 

@@ -40,6 +40,15 @@ let AppActions = {
         });
     },
 
+    setPageSize (perPage) {
+
+        return this._dispatch({
+
+            actionType: Constants.SET_PAGE_SIZE,
+            payload: { perPage }
+        });
+    },
+
     setRepo (repoName) {
 
         return this._dispatch({
