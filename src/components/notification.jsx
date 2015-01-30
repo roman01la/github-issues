@@ -45,9 +45,7 @@ let Notification = React.createClass({
         let notify = this.state.show ?
             <div className='message'>{this.state.message}</div> : null;
 
-        return (
-            <div className='notification'>{notify}</div>
-        );
+        return <div className='notification'>{notify}</div>;
     }
 
 });

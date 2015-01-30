@@ -73,6 +73,7 @@ let Pagination = React.createClass({
     render() {
 
         return (
+
             <div className='pagination'>
 
                 <Input ref='perPage'

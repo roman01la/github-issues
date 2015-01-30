@@ -41,6 +41,7 @@ let IssuesList = React.createClass({
         });
 
         return (
+
             <div className='issues'>
                 <Pagination minPage={1} minPerPage={1} />
                 <div className='list'>{issuesList}</div>

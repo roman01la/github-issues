@@ -42,6 +42,7 @@ let App = React.createClass({
         let repo = ReposStore.getState().selectedRepo;
 
         return (
+
             <div className='app'>
 
                 <section className='top'>

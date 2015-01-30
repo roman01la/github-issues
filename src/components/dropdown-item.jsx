@@ -4,24 +4,25 @@ let DropdownItem = React.createClass({
 
     getDefaultProps() {
 
-      return {
+        return {
 
-        className: 'item',
-        focus: false
-      };
+            className: 'item',
+            focus: false
+        };
     },
 
     componentDidUpdate() {
 
-      if (this.props.focus) { this.getDOMNode().focus(); }
+        if (this.props.focus) { this.getDOMNode().focus(); }
     },
 
     render() {
 
         return (
-          <li className={this.props.className}
-              tabIndex='-1'
-              onKeyDown={this.props.onKeyDown}>{this.props.children}</li>
+
+            <li className={this.props.className}
+                tabIndex='-1'
+                onKeyDown={this.props.onKeyDown}>{this.props.children}</li>
         );
     }
 

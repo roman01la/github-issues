@@ -25,6 +25,7 @@ let Input = React.createClass({
     render() {
 
         return (
+
             <div className={this.props.wrapperClassName}>
 
                 <label className={this.props.labelClassName}>{this.props.label}</label>
