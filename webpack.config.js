@@ -16,5 +16,5 @@ module.exports = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.es6', '.styl']
-    },
+    }
 };
