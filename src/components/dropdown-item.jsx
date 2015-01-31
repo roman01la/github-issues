@@ -1,13 +1,16 @@
-import React from 'react';
+import React from 'react/addons';
 
 let DropdownItem = React.createClass({
+
+    mixins: [React.addons.PureRenderMixin],
 
     getDefaultProps() {
 
         return {
 
             className: 'item',
-            focus: false
+            focus: false,
+            index: 0
         };
     },
 
@@ -16,13 +19,25 @@ let DropdownItem = React.createClass({
         if (this.props.focus) { this.getDOMNode().focus(); }
     },
 
+    _onKeyDown (event) {
+
+        event.preventDefault();
+
+        if (event.keyCode === 13) {
+
+            return this.props.onItemSelect(this.props.index);
+        }
+
+        this.props.onKeyDown(event);
+    },
+
     render() {
 
         return (
 
             <li className={this.props.className}
                 tabIndex='-1'
-                onKeyDown={this.props.onKeyDown}>{this.props.children}</li>
+                onKeyDown={this._onKeyDown}>{this.props.children}</li>
         );
     }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react/addons';
 
 import AppActions from '../actions/app-actions';
 
@@ -11,6 +11,8 @@ import Input from './input';
 import Button from './button';
 
 let Pagination = React.createClass({
+
+    mixins: [React.addons.PureRenderMixin],
 
     getDefaultProps() {
 

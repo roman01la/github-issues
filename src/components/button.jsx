@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react/addons';
 
 let Button = React.createClass({
+
+    mixins: [React.addons.PureRenderMixin],
 
     getDefaultProps() {
 

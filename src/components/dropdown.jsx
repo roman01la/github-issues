@@ -8,7 +8,9 @@ let Dropdown = React.createClass({
 
         return {
 
-            className: ''
+            className: '',
+            repos: [],
+            enter: false
         };
     },
 
@@ -28,7 +30,7 @@ let Dropdown = React.createClass({
         }
     },
 
-    _onItemKeyDown (index, event) {
+    _onItemKeyDown (event) {
 
         event.preventDefault();
 
@@ -50,12 +52,6 @@ let Dropdown = React.createClass({
                 });
 
                 break;
-
-            case 13:
-
-                this.props.select(index);
-
-                break;
         }
     },
 
@@ -64,8 +60,10 @@ let Dropdown = React.createClass({
         let list = this.props.repos.map((repo, index) => {
 
             return <DropdownItem key={index}
+                                 index={index}
                                  focus={index + 1 === this.state.activeItem}
-                                 onKeyDown={this._onItemKeyDown.bind(this, index)}>{repo}</DropdownItem>;
+                                 onKeyDown={this._onItemKeyDown}
+                                 onItemSelect={this.props.select}>{repo}</DropdownItem>;
         });
 
         return (

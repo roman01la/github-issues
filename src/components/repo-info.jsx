@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react/addons';
 
 let RepoInfo = React.createClass({
+
+    mixins: [React.addons.PureRenderMixin],
 
     getDefaultProps() {
 
