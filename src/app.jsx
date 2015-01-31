@@ -10,6 +10,8 @@ import RepoInfo from './components/repo-info';
 
 require('../styl/main.styl');
 
+React.initializeTouchEvents(true);
+
 let App = React.createClass({
 
     getInitialState() {

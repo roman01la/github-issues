@@ -1,5 +1,7 @@
 import React from 'react';
 
+import _core from 'core-js/library';
+
 import AppActions from '../actions/app-actions';
 
 import ReposStore from '../stores/repos-store';
@@ -66,7 +68,7 @@ let SearchForm = React.createClass({
 
             ReposStore.getState().repos
                 .map(repo => repo.name)
-                .filter(name => name.startsWith(repoName)) :
+                .filter(name => _core.String.startsWith(name, repoName)) :
 
             [];
     },

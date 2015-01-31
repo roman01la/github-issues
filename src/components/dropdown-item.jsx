@@ -23,7 +23,7 @@ let DropdownItem = React.createClass({
 
         event.preventDefault();
 
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13 || event.type === 'touchstart') {
 
             return this.props.onItemSelect(this.props.index);
         }
@@ -37,7 +37,8 @@ let DropdownItem = React.createClass({
 
             <li className={this.props.className}
                 tabIndex='-1'
-                onKeyDown={this._onKeyDown}>{this.props.children}</li>
+                onKeyDown={this._onKeyDown}
+                onTouchStart={this._onKeyDown}>{this.props.children}</li>
         );
     }
 

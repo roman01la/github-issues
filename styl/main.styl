@@ -25,12 +25,14 @@ label {
 
 button {
     display block
-    padding 6px 12px
+    padding 13px
     border none
     border-radius 2px
     background #479BE2
     font-size 1rem
     color #fafafa
+    line-height 0
+    margin 0
 }
 a {
     color #479BE2
@@ -118,7 +120,7 @@ pre code {
     .fa-spinner {
         position absolute
         bottom 5px
-        left 115px
+        right 10px
         transform rotate(0deg)
         animation spin 1000ms linear infinite
     }
@@ -160,17 +162,23 @@ pre code {
 .issue {
     font-size .8rem
     display flex
+    display -webkit-flex
     flex-direction column
+    -webkit-flex-direction column
 
     .issue-info {
         display flex
+        display -webkit-flex
         justify-content space-between
+        -webkit-justify-content space-between
         border-bottom 1px solid #242424
         padding 10px 0 5px
     }
     .title {
         align-self flex-start
+        -webkit-align-self flex-start
         flex 1
+        -webkit-flex 1
         margin 0 20px
 
         &:hover {
@@ -224,13 +232,69 @@ pre code {
 
 /* Notification */
 
-.notification .message {
-    background #fafafa
-    color #242424
-    border 1px solid #242424
-    padding 10px
-    position absolute
+.notification {
+    position fixed
     top 0
     right 0
+
+    .message {
+        background #fafafa
+        color #242424
+        border 1px solid #242424
+        padding 10px
+    }
+}
+
+@media only screen and (max-width: 440px) {
+
+    input {
+        height 30px
+    }
+
+    .top {
+        flex-direction column
+    }
+    .search-form {
+        margin 0
+        max-width none
+
+        input[type="text"] {
+            width 100%
+        }
+    }
+    .dropdown .item {
+        padding 6px 2px
+    }
+    .pagination {
+        text-align right
+
+        .field:first-child {
+            margin 0 20px 10px
+        }
+    }
+    .btn.prev {
+        margin 0 0 10px
+    }
+    .issue-info {
+        flex-direction column
+        -webkit-flex-direction column
+
+        .num,
+        .title,
+        .time {
+            flex 1
+            -webkit-flex 1
+        }
+        .num {
+            max-width 50px
+        }
+        .title {
+            margin 6px 0
+            padding 4px 0
+        }
+    }
+    .notification {
+        width 100%
+    }
 }
 

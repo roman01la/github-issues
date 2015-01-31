@@ -77,6 +77,7 @@ let IssueItem = React.createClass({
                          title='toggle'
                          tabIndex='0'
                          onClick={this._toggle}
+                         onTouchStart={this._toggle}
                          onKeyDown={this._toggle}>{this.props.issue.title}</div>
 
                     <div className='time'><time>{date}</time></div>
