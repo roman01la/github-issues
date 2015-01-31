@@ -40,6 +40,7 @@ let App = React.createClass({
     render() {
 
         let repo = ReposStore.getState().selectedRepo;
+        let issues = IssuesStore.getState().issues;
 
         return (
 
@@ -50,7 +51,7 @@ let App = React.createClass({
                     <RepoInfo repo={repo} />
                 </section>
 
-                <IssuesList />
+                <IssuesList issues={issues} />
                 <Notification status={this.state.status} />
 
             </div>

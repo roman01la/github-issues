@@ -9,6 +9,14 @@ let IssueItem = React.createClass({
         months: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
     },
 
+    getDefaultProps() {
+
+        return {
+
+            issue: {}
+        };
+    },
+
     getInitialState() {
 
         return {

@@ -2,6 +2,14 @@ import React from 'react';
 
 let RepoInfo = React.createClass({
 
+    getDefaultProps() {
+
+        return {
+
+            repo: {}
+        };
+    },
+
     render() {
 
         let repo = this.props.repo;

@@ -4,7 +4,6 @@ import AppActions from '../actions/app-actions';
 
 import ReposStore from '../stores/repos-store';
 import UserStore from '../stores/user-store';
-import IssuesStore from '../stores/issues-store';
 import PaginationStore from '../stores/pagination-store';
 
 import Dropdown from './dropdown';

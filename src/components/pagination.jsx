@@ -12,6 +12,15 @@ import Button from './button';
 
 let Pagination = React.createClass({
 
+    getDefaultProps() {
+
+        return {
+
+            minPage: 1,
+            minPerPage: 1
+        }
+    },
+
     getInitialState() {
 
         return PaginationStore.getState();
