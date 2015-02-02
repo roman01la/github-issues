@@ -26,7 +26,7 @@ IssuesStore.bindAction(Constants.FETCH_ISSUES_SUCCESS, action => {
 
     let nextState = { issues: action.payload.response };
 
-    IssuesStore.update(nextState, action.id, Constants.FETCH_ISSUES_SUCCESS);
+    IssuesStore.update(nextState, Constants.FETCH_ISSUES_SUCCESS, action.id);
 });
 
 IssuesStore.bindAction(Constants.PAGINATE_SUCCESS, action => {

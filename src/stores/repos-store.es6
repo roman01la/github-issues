@@ -27,7 +27,7 @@ ReposStore.bindAction(Constants.FETCH_REPOS_SUCCESS, action => {
 
     let nextState = { repos: action.payload.response };
 
-    ReposStore.update(nextState, action.id, Constants.FETCH_REPOS_SUCCESS);
+    ReposStore.update(nextState, Constants.FETCH_REPOS_SUCCESS, action.id);
 });
 
 ReposStore.bindAction(Constants.SET_REPO, action => {

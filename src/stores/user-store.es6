@@ -20,7 +20,7 @@ UserStore.bindAction(Constants.UPDATE_USER, action => {
 
     let nextState = action.payload.userData;
 
-    UserStore.update(nextState, id, Constants.UPDATE_USER_SUCCESS);
+    UserStore.update(nextState, Constants.UPDATE_USER_SUCCESS, id);
 });
 
 export default UserStore;

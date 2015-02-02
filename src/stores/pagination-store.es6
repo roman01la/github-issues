@@ -26,7 +26,7 @@ PaginationStore.bindAction(Constants.PAGINATE, action => {
 
             let nextState = action.payload.paginationData;
 
-            PaginationStore.update(nextState, id, Constants.PAGINATE_SUCCESS);
+            PaginationStore.update(nextState, Constants.PAGINATE_SUCCESS, id);
         });
 });
 
@@ -40,7 +40,7 @@ PaginationStore.bindAction(Constants.SET_PAGE_SIZE, action => {
 
     let nextState = action.payload;
 
-    PaginationStore.update(nextState, id, Constants.SET_PAGE_SIZE_SUCCESS);
+    PaginationStore.update(nextState, Constants.SET_PAGE_SIZE_SUCCESS, id);
 });
 
 export default PaginationStore;

@@ -17,7 +17,7 @@ class Store extends EventEmitter {
         Object.assign(this, defs);
     }
 
-    update (nextState, id, type) {
+    update (nextState, type, id) {
 
         Object.assign(this._state, nextState);
 
