@@ -21,7 +21,7 @@ class Store extends EventEmitter {
 
         Object.assign(this._state, nextState);
 
-        if (type) {
+        if (id && type) {
 
             this._actions[id][type]();
             delete this._actions[id];
