@@ -75,7 +75,7 @@ Use `.bindAction` method to listen for particular actions and do things like cal
 ```
 ItemsStore.bindAction(Constants.FETCH_ITEMS, action => {
 
-  API.fetchItems(null, action.payload);
+  API.fetchItems(action.payload);
 });
 ```
 To notify back action producer you should register incoming action inside of a callback fn with `.registerAction` method, which accepts an object where keys are action type constants for handling success and error, and values are injected into the action promise's `resolve` and `reject` fns. This will return a unique `id`, which then should be passed as an argument to an `API` module.
@@ -89,7 +89,7 @@ ItemsStore.bindAction(Constants.FETCH_ITEMS, action => {
     [Constants.FETCH_ITEMS_ERROR]: action.promise.reject
   });
 
-  API.fetchItems(id, action.payload);
+  API.fetchItems(action.payload, id);
 });
 ```
 
@@ -106,13 +106,15 @@ ItemsStore.bindAction(Constants.FETCH_ITEMS_SUCCESS, action => {
   /* OR */
 
   /* Update store and notify action producer */
-  ItemsStore.update(nextState, action.id, Constants.FETCH_ITEMS_SUCCESS);
+  ItemsStore.update(nextState, Constants.FETCH_ITEMS_SUCCESS, action.id);
 });
 ```
 
-Additionally `CHANGE_EVENT` will be emitted along with store's `status`, and so components which are listening for changes can distinguish between succeed or failed changes and respond accordingly.
+Additionally `CHANGE_EVENT` will be emitted along with provided store's `status`, and so components which are listening for changes can distinguish between succeed or failed changes and respond accordingly.
 
 ```
+ItemsStore.update(nextState, Constants.FETCH_ITEMS_SUCCESS);
+
 _onChange (status) {
 
   if (status === Constants.FETCH_ITEMS_SUCCESS) {
@@ -121,6 +123,8 @@ _onChange (status) {
   }
 }
 ```
+
+Doing everything explicitly might be confusing and looks like an overhead, but it's still optional functionality and you might don't want to use it everywhere.
 
 ## Flux API
 
@@ -137,7 +141,7 @@ Object.assign(ItemsAPI, Actions);
 `._fetch` method accepts `id`, `url` and action type constants for dispatching success or error actions.
 
 ```
-ItemsAPI.fetchItems = (id, payload) {
+ItemsAPI.fetchItems = (payload, id) {
 
   return this._fetch.call(this, id, payload.url, {
 
@@ -154,3 +158,6 @@ ItemsStore.update(nextState)
   .then(/* ... */)
   .catch(/* ... */);
 ```
+
+## Flux Dispatcher
+[Facebook's Flux `Dispatcher`](https://github.com/facebook/flux/blob/master/src/Dispatcher.js)
