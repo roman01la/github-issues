@@ -4,7 +4,7 @@ import Constants from '../constants/app-constants';
 
 let GitHubAPI = {
 
-    fetchIssues (id, payload) {
+    fetchIssues (payload, id) {
 
         let url = this._getIssuesURL(payload);
 
@@ -15,7 +15,7 @@ let GitHubAPI = {
         });
     },
 
-    paginate (id, payload) {
+    paginate (payload, id) {
 
         let url = this._getIssuesURL(payload);
 
@@ -26,7 +26,7 @@ let GitHubAPI = {
         });
     },
 
-    fetchRepos (id, userName) {
+    fetchRepos (userName, id) {
 
         let url = Constants.API_ROOT + 'users/' + userName + '/repos';
         url += '?per_page=9999';

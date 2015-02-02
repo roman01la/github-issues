@@ -21,7 +21,7 @@ PaginationStore.bindAction(Constants.PAGINATE, action => {
         [Constants.PAGINATE_ERROR]: action.promise.reject
     });
 
-    GitHubAPI.paginate(id, action.payload)
+    GitHubAPI.paginate(action.payload, id)
         .then(() => {
 
             let nextState = action.payload.paginationData;

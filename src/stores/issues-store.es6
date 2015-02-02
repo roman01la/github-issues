@@ -19,7 +19,7 @@ IssuesStore.bindAction(Constants.FETCH_ISSUES, action => {
         [Constants.FETCH_ISSUES_ERROR]: action.promise.reject
     });
 
-    GitHubAPI.fetchIssues(id, action.payload);
+    GitHubAPI.fetchIssues(action.payload, id);
 });
 
 IssuesStore.bindAction(Constants.FETCH_ISSUES_SUCCESS, action => {

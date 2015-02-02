@@ -20,7 +20,7 @@ ReposStore.bindAction(Constants.FETCH_REPOS, action => {
         [Constants.FETCH_REPOS_ERROR]: action.promise.reject
     });
 
-    GitHubAPI.fetchRepos(id, action.payload.userName);
+    GitHubAPI.fetchRepos(action.payload.userName, id);
 });
 
 ReposStore.bindAction(Constants.FETCH_REPOS_SUCCESS, action => {
